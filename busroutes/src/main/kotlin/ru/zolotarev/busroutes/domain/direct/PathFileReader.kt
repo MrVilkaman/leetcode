@@ -1,4 +1,4 @@
-package ru.zolotarev.busroutes
+package ru.zolotarev.busroutes.domain.direct
 
 import java.io.File
 import java.net.URI

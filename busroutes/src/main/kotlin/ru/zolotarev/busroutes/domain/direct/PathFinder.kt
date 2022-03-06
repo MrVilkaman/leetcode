@@ -1,4 +1,4 @@
-package ru.zolotarev.busroutes
+package ru.zolotarev.busroutes.domain.direct
 
 
 interface PathFinder {

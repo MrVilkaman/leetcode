@@ -1,4 +1,4 @@
-package ru.zolotarev.busroutes.models
+package ru.zolotarev.busroutes.api.direct
 
 
 data class DirectResponse(
