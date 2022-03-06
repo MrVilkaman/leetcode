@@ -6,12 +6,12 @@ import java.net.URI
 
 interface PathFileReader {
 
-    fun readFile(uri: URI, block: (Sequence<String>) -> Unit)
+    fun <T> readFile(uri: URI, block: (Sequence<String>) -> T): T
 }
 
 class PathFileReaderImpl : PathFileReader {
 
-    override fun readFile(uri: URI, block: (Sequence<String>) -> Unit) {
-        File(uri).useLines(block = block)
+    override fun <T> readFile(uri: URI, block: (Sequence<String>) -> T): T {
+        return File(uri).useLines(block = block)
     }
 }

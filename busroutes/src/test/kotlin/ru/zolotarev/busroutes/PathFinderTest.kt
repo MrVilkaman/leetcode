@@ -6,7 +6,7 @@ import org.junit.Test
 
 class PathFinderTest {
 
-    private val route:PathFinder = PathFinderImpl()
+    private val route: PathFinder = PathFinderImpl()
 
     @Test
     fun testRightWay() {
