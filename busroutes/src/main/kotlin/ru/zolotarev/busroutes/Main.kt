@@ -1,27 +1,31 @@
 package ru.zolotarev.busroutes
 
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import ru.zolotarev.busroutes.api.direct.directWayRoute
-import ru.zolotarev.busroutes.domain.direct.ExistValidWayUseCase
-import java.io.File
-
 
 fun main(args: Array<String>) {
 
-    val existValidWayUseCase = lazy { ExistValidWayUseCase(File("busroutes/src/main/assets/routes.txt")) }
+    val firstArg = args.getOrNull(0)
 
-    embeddedServer(Netty, port = 8080) {
-        routing {
-            get("/") {
-                call.respondText("Hello, world!")
-            }
-            route("/api") {
-                directWayRoute(existValidWayUseCase)
-            }
-        }
-    }.start(wait = true)
+    when {
+        firstArg in arrayOf("-h", "help") -> showHelp()
+        firstArg in arrayOf("-r", "routes") -> showAllRoutes()
+        firstArg != null -> createAndStartServer(firstArg)
+        else -> throw IllegalArgumentException("Expected one arg with path to routes.txt. For more info use -h")
+    }
+}
+
+private fun showAllRoutes() {
+    println("*****")
+    println("/")
+    println("/api/direct //  direct route connecting the two specified stops or not.")
+    println("   QueryParams: 'from', 'to' //  direct route connecting the two specified stops or not.")
+    println("/docs // Show test description")
+    println("*****")
+
+}
+
+private fun showHelp() {
+    println("For start using server pass path to file with routes as first args.")
+    println("For show all available routes use \"-r\"")
+    println("")
+    println("Version 0.1")
 }
