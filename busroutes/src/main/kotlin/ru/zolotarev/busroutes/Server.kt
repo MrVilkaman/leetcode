@@ -1,6 +1,7 @@
 package ru.zolotarev.busroutes
 
 import io.ktor.application.*
+import io.ktor.http.content.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
@@ -22,6 +23,10 @@ fun createAndStartServer(routesFilePath: String) {
             }
             route("/api") {
                 directWayRoute(existValidWayUseCase)
+            }
+
+            static("docs") {
+                files("busroutes/src/main/assets/Test.pdf")
             }
         }
     }.start(wait = true)
