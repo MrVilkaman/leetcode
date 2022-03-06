@@ -21,7 +21,7 @@ fun Route.directWayRoute(useCase: Lazy<ExistValidWayUseCase>) {
         }
 
         try {
-            val response = useCase.value.main(from, to)
+            val response = useCase.value.invoke(from, to)
             call.respondText(response)
         } catch (e: Exception) {
             // todo плохо во внешний мир отдавать инфу о внутреннией ошибке =(

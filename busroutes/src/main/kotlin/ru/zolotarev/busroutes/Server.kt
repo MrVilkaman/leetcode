@@ -11,10 +11,12 @@ import ru.zolotarev.busroutes.domain.direct.ExistValidWayUseCase
 import java.io.File
 
 
+const val DB_FILE_NAME = "routes.txt"
+const val TEST_FILE_NAME = "Test.pdf"
+
 fun createAndStartServer(routesFilePath: String) {
 
-
-    val existValidWayUseCase = lazy { ExistValidWayUseCase(File(routesFilePath)) }
+    val existValidWayUseCase = lazy { ExistValidWayUseCase(File(routesFilePath, DB_FILE_NAME)) }
 
     embeddedServer(Netty, port = 8080) {
         routing {
@@ -26,7 +28,7 @@ fun createAndStartServer(routesFilePath: String) {
             }
 
             static("docs") {
-                files("busroutes/src/main/assets/Test.pdf")
+                files("${routesFilePath}/$TEST_FILE_NAME")
             }
         }
     }.start(wait = true)

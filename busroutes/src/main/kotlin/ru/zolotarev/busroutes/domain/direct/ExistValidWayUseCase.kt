@@ -6,12 +6,12 @@ import ru.zolotarev.busroutes.api.direct.DirectResponse
 import java.io.File
 
 class ExistValidWayUseCase(
-    private val routeSheetFile: File = File("src/main/assets/routes.txt"),
+    private val routeSheetFile: File,
     private val fileReader: PathFileReader = PathFileReaderImpl(),
     private val pathFinder: PathFinder = PathFinderImpl()
 ) {
 
-    suspend fun main(from: Int, to: Int): String = withContext(Dispatchers.IO) {
+    suspend fun invoke(from: Int, to: Int): String = withContext(Dispatchers.IO) {
         val block = fun(lines: Sequence<String>): DirectResponse {
             val direct = pathFinder.existValidRoute(lines, from, to)
             return DirectResponse(from, to, direct)

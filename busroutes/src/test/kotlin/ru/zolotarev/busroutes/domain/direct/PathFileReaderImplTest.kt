@@ -2,6 +2,8 @@ package ru.zolotarev.busroutes.domain.direct
 
 import org.assertj.core.api.Assertions
 import org.junit.Test
+import ru.zolotarev.busroutes.DB_FILE_NAME
+import ru.zolotarev.busroutes.TEST_FILE_NAME
 import java.io.File
 
 
@@ -11,7 +13,7 @@ class PathFileReaderImplTest() {
 
     @Test
     fun testReadFile() {
-        val toURI = File("src/main/assets/routes.txt").toURI()
+        val toURI = File("src/main/resources/$DB_FILE_NAME").toURI()
 
 
         case.readFile(toURI) {

@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
         firstArg in arrayOf("-h", "help") -> showHelp()
         firstArg in arrayOf("-r", "routes") -> showAllRoutes()
         firstArg != null -> createAndStartServer(firstArg)
-        else -> throw IllegalArgumentException("Expected one arg with path to routes.txt. For more info use -h")
+        else -> throw IllegalArgumentException("Expected one arg with path to folder with ${DB_FILE_NAME}. For more info use -h")
     }
 }
 
