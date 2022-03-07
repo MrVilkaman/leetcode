@@ -43,8 +43,9 @@ shadowJar {
 
 dependencies {
 
-    implementation("io.ktor:ktor-server-core:1.6.7")
-    implementation("io.ktor:ktor-server-netty:1.6.7")
+    def ktor_version = "1.6.7"
+    implementation("io.ktor:ktor-server-core:$ktor_version")
+    implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("ch.qos.logback:logback-classic:1.2.5")
 
     testImplementation 'junit:junit:4.13.2'
