@@ -6,15 +6,15 @@ import org.junit.Test
 
 class PathFinderTest {
 
-    private val route: PathFinder = PathFinderImpl()
+    private val route: PathFinder = FastPathFinderImpl()
 
     @Test
     fun testRightWay() {
 
         val routeLines = arrayOf(
-            "0 0 1 2 3 4",
-            "1 3 1 6 5",
-            "2 0 6 4"
+            "0 0 1 2 3 4 ",
+            "1 3 1 6 5" ,
+            "2 0 6 4 "
         ).asSequence()
 
 
@@ -27,9 +27,9 @@ class PathFinderTest {
     fun testWrongWay_missRoute() {
 
         val routeLines = arrayOf(
-            "0 0 1 2 3 4",
-            "1 3 1 6 5",
-            "2 0 6 4"
+            "0 0 1 2 3 4 ",
+            "1 3 1 6 5 ",
+            "2 0 6 4 "
         ).asSequence()
 
 
@@ -44,9 +44,9 @@ class PathFinderTest {
     fun testWrongWay_missDirection() {
 
         val routeLines = arrayOf(
-            "0 0 1 2 3 4",
-            "1 3 1 6 5",
-            "2 0 6 4"
+            "0 0 1 2 3 4 ",
+            "1 3 1 6 5 ",
+            "2 0 6 4 "
         ).asSequence()
 
 
@@ -59,13 +59,74 @@ class PathFinderTest {
     fun testCheckRountId() {
 
         val routeLines = arrayOf(
-            "0 0 1 2 3 4",
-            "1 3 1 6 5",
-            "2 0 6 4"
+            "0 0 1 2 3 4 ",
+            "1 3 1 6 5 ",
+            "2 0 6 4 "
         ).asSequence()
 
 
         val result = route.existValidRoute(routeLines, 2, 6)
+
+        Assertions.assertThat(result).isFalse
+    }
+
+    @Test
+    fun testEndNumber() {
+
+        val routeLines = arrayOf(
+            "0 0 1 2 3 4 ",
+            "1 3 1 6 5 ",
+            "2 0 6 4 "
+        ).asSequence()
+
+
+        val result = route.existValidRoute(routeLines, 0, 4)
+
+        Assertions.assertThat(result).isTrue
+    }
+
+    @Test
+    fun testBigNumber() {
+
+        val routeLines = arrayOf(
+            "0 0 10 2 3 40 ",
+            "1 3 1 6 5 ",
+            "2 0 6 9 "
+        ).asSequence()
+
+
+        val result = route.existValidRoute(routeLines, 0, 4)
+
+        Assertions.assertThat(result).isFalse
+    }
+
+
+    @Test
+    fun testBigNumber2() {
+
+        val routeLines = arrayOf(
+            "0 0 10 2 3 40 ",
+            "1 3 1 6 5 ",
+            "2 0 6 9 "
+        ).asSequence()
+
+
+        val result = route.existValidRoute(routeLines, 1, 4)
+
+        Assertions.assertThat(result).isFalse
+    }
+
+    @Test
+    fun testBigNumber3() {
+
+        val routeLines = arrayOf(
+            "0 0 21 2 3 24 6 ",
+            "1 3 1 6 5 ",
+            "2 0 6 9 "
+        ).asSequence()
+
+
+        val result = route.existValidRoute(routeLines, 1, 4)
 
         Assertions.assertThat(result).isFalse
     }

@@ -21,8 +21,8 @@ fun Route.directWayRoute(useCase: Lazy<ExistValidWayUseCase>) {
         }
 
         try {
-            val response = useCase.value.invoke(from, to)
-            call.respondText(response)
+            val response = DirectResponse(from, to, useCase.value.invoke(from, to))
+            call.respondText(response.toJson())
         } catch (e: Exception) {
             // todo плохо во внешний мир отдавать инфу о внутреннией ошибке =(
             call.respond(HttpStatusCode.InternalServerError.description(e.toString()))

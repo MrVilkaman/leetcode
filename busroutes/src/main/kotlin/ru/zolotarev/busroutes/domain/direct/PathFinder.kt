@@ -9,23 +9,19 @@ interface PathFinder {
     fun existValidRoute(lines: Sequence<String>, x: Int, y: Int): Boolean
 }
 
-class PathFinderImpl : PathFinder {
+class FastPathFinderImpl : PathFinder {
 
     override fun existValidRoute(lines: Sequence<String>, x: Int, y: Int): Boolean {
-        val route = lines
-            .map {
-                it.splitToSequence(' ')
-                    .drop(1) // идентификатор маршрута
-                    .filter(String::isNotEmpty)
-                    .map(String::toInt)
-                    .filter { stepId -> stepId == x || stepId == y } // находим обе остановки
-            }.find { steps ->
 
-                // нам важен порядок
-                if (steps.count() != 2) {
-                    return@find false
-                }
-                steps.elementAt(0) == x && steps.elementAt(1) == y
+        val xStr = " $x "
+        val yStr = " $y "
+
+        val route = lines
+            .find {
+                val indexX = it.indexOf(xStr)
+                val indexY = it.indexOf(yStr)
+
+                indexX != -1 && indexY != -1 && indexX < indexY
             }
 
         return route != null

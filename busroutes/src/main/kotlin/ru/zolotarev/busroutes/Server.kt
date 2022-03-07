@@ -8,6 +8,7 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import ru.zolotarev.busroutes.api.direct.directWayRoute
 import ru.zolotarev.busroutes.domain.direct.ExistValidWayUseCase
+import ru.zolotarev.busroutes.domain.direct.ExistValidWayUseCaseImpl
 import java.io.File
 
 
@@ -16,7 +17,7 @@ const val TEST_FILE_NAME = "Test.pdf"
 
 fun createAndStartServer(routesFilePath: String) {
 
-    val existValidWayUseCase = lazy { ExistValidWayUseCase(File(routesFilePath, DB_FILE_NAME)) }
+    val existValidWayUseCase = lazy { ExistValidWayUseCaseImpl(File(routesFilePath, DB_FILE_NAME)) }
 
     embeddedServer(Netty, port = 8080) {
         routing {

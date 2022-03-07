@@ -2,22 +2,22 @@ package ru.zolotarev.busroutes.domain.direct
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.zolotarev.busroutes.api.direct.DirectResponse
 import java.io.File
 
-class ExistValidWayUseCase(
+interface ExistValidWayUseCase {
+    suspend fun invoke(from: Int, to: Int): Boolean
+}
+
+class ExistValidWayUseCaseImpl(
     private val routeSheetFile: File,
     private val fileReader: PathFileReader = PathFileReaderImpl(),
-    private val pathFinder: PathFinder = PathFinderImpl()
-) {
+    private val pathFinder: PathFinder = FastPathFinderImpl()
+) : ExistValidWayUseCase {
 
-    suspend fun invoke(from: Int, to: Int): String = withContext(Dispatchers.IO) {
-        val block = fun(lines: Sequence<String>): DirectResponse {
-            val direct = pathFinder.existValidRoute(lines, from, to)
-            return DirectResponse(from, to, direct)
+    override suspend fun invoke(from: Int, to: Int): Boolean = withContext(Dispatchers.IO) {
+
+        fileReader.readFile(routeSheetFile.toURI()) { lines ->
+            pathFinder.existValidRoute(lines, from, to)
         }
-
-        fileReader.readFile(routeSheetFile.toURI(), block)
-            .toJson()
     }
 }

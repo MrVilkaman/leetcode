@@ -20,9 +20,9 @@ class PathFileReaderImplTest() {
             val toList = it.toList()
             Assertions.assertThat(toList)
                 .containsSequence(
-                    "0 0 1 2 3 4",
-                    "1 3 1 6 5",
-                    "2 0 6 4"
+                    "0 0 1 2 3 4 ",
+                    "1 3 1 6 5 ",
+                    "2 0 6 4 "
                 )
         }
     }
