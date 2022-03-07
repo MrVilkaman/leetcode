@@ -16,6 +16,7 @@ class PathFinderImpl : PathFinder {
             .map {
                 it.splitToSequence(' ')
                     .drop(1) // идентификатор маршрута
+                    .filter(String::isNotEmpty)
                     .map(String::toInt)
                     .filter { stepId -> stepId == x || stepId == y } // находим обе остановки
             }.find { steps ->
