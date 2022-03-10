@@ -27,6 +27,7 @@ class CreateRandomFileUseCase {
         file.bufferedWriter().use { out ->
             out.generateFile(lineCount)
         }
+        println("New File was created (${file.absolutePath})")
     }
 
     private fun BufferedWriter.generateFile(lineCount: Int) {

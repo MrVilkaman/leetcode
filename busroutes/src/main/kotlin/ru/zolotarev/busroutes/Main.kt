@@ -1,6 +1,7 @@
 package ru.zolotarev.busroutes
 
 import ru.zolotarev.busroutes.domain.CreateRandomFileUseCase
+import kotlin.random.Random
 
 
 fun main(args: Array<String>) {

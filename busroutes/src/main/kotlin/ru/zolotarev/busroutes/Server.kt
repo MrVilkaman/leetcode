@@ -7,7 +7,6 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import ru.zolotarev.busroutes.api.direct.directWayRoute
-import ru.zolotarev.busroutes.domain.direct.ExistValidWayUseCase
 import ru.zolotarev.busroutes.domain.direct.ExistValidWayUseCaseImpl
 import java.io.File
 

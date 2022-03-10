@@ -28,3 +28,9 @@ java -jar build/libs/busroutes-0.1.0.jar src/main/resources
 $java -jar build/libs/busroutes.jar -h
 
 ```
+
+Также можно сгенерировать файл routes.txt самостоятельно:
+```
+$java -jar build/libs/busroutes-0.1.0.jar -g 100000 busroutes/build/libs 
+
+```
